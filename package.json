@@ -1,0 +1,114 @@
+{
+  "name": "vscode-mips",
+  "displayName": "vscode-mips",
+  "publisher": "triciopo",
+  "description": "MIPS Support for VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/triciopo/vscode-mips"
+  },
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "MIPS for VS Code",
+        "properties": {
+          "mips-vscode.marsPath": {
+            "type": "string"
+          }
+        }
+      }
+    ],
+    "languages": [
+      {
+        "id": "MIPS",
+        "extensions": [
+          ".s",
+          ".asm"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "MIPS",
+        "scopeName": "source.mips",
+        "path": "./syntaxes/mips.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "vscode-mips.assembleExec",
+        "title": "Assemble and run",
+        "icon": "$(run)"
+      },
+      {
+        "command": "vscode-mips.assembleMips",
+        "title": "Assemble",
+        "icon": "$(test-view-icon)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vscode-mips.assembleExec",
+        "key": "F5",
+        "enablement": "resourceLangId == MIPS"
+      },
+      {
+        "command": "vscode-mips.assembleMips",
+        "key": "F4",
+        "enablement": "resourceLangId == MIPS"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "vscode-mips.assembleMips",
+          "group": "navigation",
+          "when": "resourceLangId == MIPS"
+        }
+      ],
+      "editor/title/run": [
+        {
+          "command": "vscode-mips.assembleExec",
+          "group": "1_run",
+          "when": "resourceLangId == MIPS"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.83.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.51.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
