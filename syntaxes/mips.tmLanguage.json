@@ -19,6 +19,9 @@
       "include": "#keywords"
     },
     {
+      "include": "#macros"
+    },
+    {
       "include": "#strings"
     }
   ],
@@ -71,7 +74,11 @@
       "patterns": [
         {
           "name": "keyword.operators.mips",
-          "match": "\\b(add.s|add.d|add|addi|addiu|addu|sub|subu|mul|mulu|div|divu|rem|remu|neg|negu|move)\\b"
+          "match": "\\b(add.s|add.d|add|addi|addiu|addu|sub.s|sub.d|sub|subu|mul.d|mul.s|mul|mulu|div.s|div.d|div|divu|rem|remu|sqrt.d|sqrt.s|madd|maddu|msub|msubu)\\b"
+        },
+        {
+          "name": "keyword.move.mips",
+          "match": "\\b(mov.s|mov.d|move|mfhi|mflo|mthi|mtlo|mfc0|mtc0|mtc1|mfc1.d|mfc1|mult|multu|mulo|mulou|movn.s|movn.d|movn|movz.s|movz.d|movz|movf.d|movt.d|movf.s|movt.s|movf|movt)\\b"
         },
         {
           "name": "keyword.load.mips",
@@ -79,19 +86,67 @@
         },
         {
           "name": "keyword.store.mips",
-          "match": "\\b(sb|sh|sw|sd)\\b"
+          "match": "\\b(sb|sc|sh|sw|sd|swl|swr|swc1|sdc1)\\b"
         },
         {
           "name": "keyword.logic.mips",
-          "match": "\\b(and|andi|or|ori|xor|xori|nor|not|sll|sllv|srl|srlv|sra|srav|rol|ror)\\b"
+          "match": "\\b(and|andi|or|ori|xor|xori|nor|not|sll|sllv|srl|srlv|slti|sltiu|sra|srav|rol|ror|neg.d|neg.s|neg|negu)\\b"
         },
         {
           "name": "keyword.set.mips",
           "match": "\\b(seq|sge|sgeu|sgt|sgtu|sle|sleu|slt|sltu|sne)\\b"
         },
         {
+          "name": "keyword.compare.mips",
+          "match": "\\b(c.eq.s|c.le.s|c.lt.s|c.eq.d|c.le.d|c.lt.d)\\b"
+        },
+        {
+          "name": "keyword.convert.mips",
+          "match": "\\b(cvt.d.s|cvt.d.w|cvt.s.d|cvt.s.w|cvt.w.d|cvt.w.s)\\b"
+        },
+        {
+          "name": "keyword.float.mips",
+          "match": "\\b(abs.d|abs.s|ceil.w.d|ceil.w.s|floor.w.d|floor.w.s|round.w.d|round.w.s|trunc.w.d|trunc.w.s)\\b"
+        },
+        {
+          "name": "keyword.trap.mips",
+          "match": "\\b(teq|teqi|tne|tnei|tge|tgeu|tgei|tgeiu|tltu|tlti|tltiu)\\b"
+        },
+        {
           "name": "keyword.control.mips",
-          "match": "\\b(blt|bltz|bltzal|beqz|ble|blez|beq|beqz|bge|bgez|bgezal|bgt|bgtz|bne|bnez|j|jr|jal|jalr|syscall|break)\\b"
+          "match": "\\b(j|jr|jal|jalr)\\b"
+        },
+        {
+          "name": "keyword.control.mips",
+          "match": "\\b(blt|bltzal|bltz|beqz|ble|blez|beq|beqz|bge|bgez|bgezal|bgt|bgtz|bne|bnez|bc1t|bc1f)\\b"
+        },
+        {
+          "name": "keyword.control.mips",
+          "match": "\\b(syscall|break|nop|eret|clo|clz)\\b"
+        }
+      ]
+    },
+    "macros": {
+      "patterns": [
+        {
+          "name": "support.function.mips",
+          "match": "(?<=\\.macro\\s)\\w+"
+        },
+        {
+          "name": "support.class.mips",
+          "match": "\\.(macro|end_macro)"
+        },
+        {
+          "name": "keyword.control.mips",
+          "match": "\\w+(?=\\()"
+        },
+        {
+          "name": "support.variable.mips",
+          "match": "\\([^)]+(?:,[^)]+)*\\)|\\([^)]+\\)"
+        },
+        {
+          "name": "support.variable.mips",
+          "match": "%([^%]+)"
         }
       ]
     },
