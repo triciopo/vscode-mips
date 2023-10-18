@@ -1,0 +1,772 @@
+{
+    "nop": {
+        "prefix": "nop",
+        "body": ["nop"],
+        "description": "Null operation : machine code is all zeroes"
+    },
+    "add $t1,$t2,$t3": {
+        "prefix": "add",
+        "body": ["add \\$t1, \\$t2, \\$t3"],
+        "description": "Addition with overflow : set $t1 to ($t2 plus $t3)"
+    },  
+    "addi $t1,$t2,-100": {
+        "prefix": "addi",
+        "body": ["addi \\$t1, \\$t2, -100"],
+        "description": "Addition immediate with overflow : set $t1 to ($t2 plus signed 16-bit immediate)"
+    },
+    "addiu $t1,$t2,-100": {
+        "prefix": "addiu", 
+        "body": ["addiu \\$t1, \\$t2, -100"],
+        "description": "Addition immediate unsigned without overflow : set $t1 to ($t2 plus signed 16-bit immediate), no overflow"
+    },
+    "addu $t1,$t2,$t3": {
+        "prefix": "addu",
+        "body": ["addu \\$t1, \\$t2, \\$t3"],
+        "description": "Addition unsigned without overflow : set $t1 to ($t2 plus $t3), no overflow"
+    },
+    "add.d $f2,$f4,$f6": {
+        "prefix": "add.d",
+        "body": ["add.d \\$f2, \\$f4, \\$f6"],
+        "description": "Floating point addition double precision : Set $f2 to double-precision floating point value of $f4 plus $f6"
+    },
+    "add.s $f0,$f1,$f3": {
+        "prefix": "add.s",
+        "body": ["add.s \\$f0, \\$f1, \\$f3"],
+        "description": "Floating point addition single precision : Set $f0 to single-precision floating point value of $f1 plus $f3"
+    },
+    "sub $t1,$t2,$t3": {
+        "prefix": "sub",
+        "body": ["sub \\$t1, \\$t2, \\$t3"], 
+        "description": "Subtraction with overflow : set $t1 to ($t2 minus $t3)"
+    },
+    "subu $t1,$t2,$t3": {
+        "prefix": "subu",
+        "body": ["subu \\$t1, \\$t2, \\$t3"],
+        "description": "Subtraction unsigned without overflow : set $t1 to ($t2 minus $t3), no overflow"
+    },
+    "mult $t1,$t2": {
+        "prefix": "mult",
+        "body": ["mult \\$t1, \\$t2"],
+        "description": "Multiplication : Set hi to high-order 32 bits, lo to low-order 32 bits of the product of $t1 and $t2 (use mfhi to access hi, mflo to access lo)"
+    },
+    "multu $t1,$t2": {
+        "prefix": "multu",
+        "body": ["multu \\$t1, \\$t2"], 
+        "description": "Multiplication unsigned : Set HI to high-order 32 bits, LO to low-order 32 bits of the product of unsigned $t1 and $t2 (use mfhi to access HI, mflo to access LO)"  
+    },
+    "mul $t1,$t2,$t3": {
+        "prefix": "mul",
+        "body": ["mul \\$t1, \\$t2, \\$t3"],
+        "description": "Multiplication without overflow  : Set HI to high-order 32 bits, LO and $t1 to low-order 32 bits of the product of $t2 and $t3 (use mfhi to access HI, mflo to access LO)"
+    },
+    "mul.d $f2,$f4,$f6": {
+        "prefix": "mul.d",
+        "body": ["mul.d \\$f2, \\$f4, \\$f6"],
+        "description": "Floating point multiplication double precision : Set $f2 to double-precision floating point value of $f4 times $f6"
+    },
+    "mul.s $f0,$f1,$f3": {
+        "prefix": "mul.s",
+        "body": ["mul.s \\$f0, \\$f1, \\$f3"],
+        "description": "Floating point multiplication single precision : Set $f0 to single-precision floating point value of $f1 times $f3"
+    },
+    "madd $t1,$t2": {
+        "prefix": "madd",
+        "body": ["madd \\$t1, \\$t2"],
+        "description": "Multiply add : Multiply $t1 by $t2 then increment HI by high-order 32 bits of product, increment LO by low-order 32 bits of product (use mfhi to access HI, mflo to access LO)"
+    },  
+    "maddu $t1,$t2": {
+        "prefix": "maddu",
+        "body": ["maddu \\$t1, \\$t2"],
+        "description": "Multiply add unsigned : Multiply $t1 by $t2 then increment HI by high-order 32 bits of product, increment LO by low-order 32 bits of product, unsigned (use mfhi to access HI, mflo to access LO)"
+    },
+    "msub $t1,$t2": {
+        "prefix": "msub", 
+        "body": ["msub \\$t1, \\$t2"],
+        "description": "Multiply subtract : Multiply $t1 by $t2 then decrement HI by high-order 32 bits of product, decrement LO by low-order 32 bits of product (use mfhi to access HI, mflo to access LO)"
+    },
+    "msubu $t1,$t2": {
+        "prefix": "msubu",
+        "body": ["msubu \\$t1, \\$t2"],
+        "description": "Multiply subtract unsigned : Multiply $t1 by $t2 then decrement HI by high-order 32 bits of product, decement LO by low-order 32 bits of product, unsigned (use mfhi to access HI, mflo to access LO)"   
+    },
+    "div $t1,$t2": {
+        "prefix": "div",
+        "body": ["div \\$t1, \\$t2"],
+        "description": "Division with overflow : Divide $t1 by $t2 then set LO to quotient and HI to remainder (use mfhi to access HI, mflo to access LO)"  
+    },
+    "divu $t1,$t2": {
+        "prefix": "divu",
+        "body": ["divu \\$t1, \\$t2"],
+        "description": "Division unsigned without overflow : Divide unsigned $t1 by $t2 then set LO to quotient and HI to remainder (use mfhi to access HI, mflo to access LO)"
+    },
+    "mfhi $t1": {
+        "prefix": "mfhi",
+        "body": ["mfhi \\$t1"],
+        "description": "Move from HI register : Set $t1 to contents of HI (see multiply and divide operations)"
+    },
+    "mflo $t1": {
+        "prefix": "mflo",
+        "body": ["mflo \\$t1"],
+        "description": "Move from LO register : Set $t1 to contents of LO (see multiply and divide operations)"  
+    },
+    "mthi $t1": {
+        "prefix": "mthi",
+        "body": ["mthi \\$t1"],
+        "description": "Move to HI registerr : Set HI to contents of $t1 (see multiply and divide operations)"
+    },
+    "mtlo $t1": {
+        "prefix": "mtlo",
+        "body": ["mtlo \\$t1"],
+        "description": "Move to LO register : Set LO to contents of $t1 (see multiply and divide operations)"
+    },
+    "and $t1,$t2,$t3": {
+        "prefix": "and",
+        "body": ["and \\$t1, \\$t2, \\$t3"], 
+        "description": "Bitwise AND : Set $t1 to bitwise AND of $t2 and $t3"
+    },
+    "or $t1,$t2,$t3": {
+        "prefix": "or",
+        "body": ["or \\$t1, \\$t2, \\$t3"],
+        "description": "Bitwise OR : Set $t1 to bitwise OR of $t2 and $t3"  
+    },
+    "andi $t1,$t2,100": {
+        "prefix": "andi",
+        "body": ["andi \\$t1, \\$t2, 100"],
+        "description": "Bitwise AND immediate : Set $t1 to bitwise AND of $t2 and zero-extended 16-bit immediate"
+    },
+    "ori $t1,$t2,100": {
+        "prefix": "ori",
+        "body": ["ori \\$t1, \\$t2, 100"],
+        "description": "Bitwise OR immediate : Set $t1 to bitwise OR of $t2 and zero-extended 16-bit immediate"
+    },
+    "nor $t1,$t2,$t3": {
+        "prefix": "nor",
+        "body": ["nor \\$t1, \\$t2, \\$t3"],
+        "description": "Bitwise NOR : Set $t1 to bitwise NOR of $t2 and $t3" 
+    },
+    "xor $t1,$t2,$t3": {
+        "prefix": "xor",
+        "body": ["xor \\$t1, \\$t2, \\$t3"],
+        "description": "Bitwise XOR (exclusive OR) : Set $t1 to bitwise XOR of $t2 and $t3"
+    },
+    "xori $t1,$t2,100": {
+        "prefix": "xori",
+        "body": ["xori \\$t1, \\$t2, 100"],
+        "description": "Bitwise XOR immediate : Set $t1 to bitwise XOR of $t2 and zero-extended 16-bit immediate"
+    },
+    "sll $t1,$t2,10": {
+        "prefix": "sll",
+        "body": ["sll \\$t1, \\$t2, 10"],
+        "description": "Shift left logical : Set $t1 to result of shifting $t2 left by number of bits specified by immediate"
+    },  
+    "sllv $t1,$t2,$t3": {
+        "prefix": "sllv",
+        "body": ["sllv \\$t1, \\$t2, \\$t3"],
+        "description": "Shift left logical variable : Set $t1 to result of shifting $t2 left by number of bits specified by value in low-order 5 bits of $t3"
+    },
+    "srl $t1,$t2,10": {
+        "prefix": "srl",
+        "body": ["srl \\$t1, \\$t2, 10"], 
+        "description": "Shift right logical : Set $t1 to result of shifting $t2 right by number of bits specified by immediate"
+    },
+    "sra $t1,$t2,10": {
+        "prefix": "sra",
+        "body": ["sra \\$t1, \\$t2, 10"],
+        "description": "Shift right arithmetic : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by immediate"   
+    },
+    "srav $t1,$t2,$t3": {
+        "prefix": "srav",
+        "body": ["srav \\$t1, \\$t2, \\$t3"],
+        "description": "Shift right arithmetic variable : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3"
+    },
+    "srlv $t1,$t2,$t3": {
+        "prefix": "srlv",
+        "body": ["srlv \\$t1, \\$t2, \\$t3"],
+        "description": "Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3"
+    },
+    "lw $t1,-100($t2)": {
+        "prefix": "lw",
+        "body": ["lw \\$t1, -100(\\$t2)"],
+        "description": "Load word : Set $t1 to contents of effective memory word address"
+    },
+    "ll $t1,-100($t2)": {
+        "prefix": "ll",
+        "body": ["ll \\$t1, -100(\\$t2)"], 
+        "description": "Load linked : Paired with Store Conditional (sc) to perform atomic read-modify-write.  Treated as equivalent to Load Word (lw) because MARS does not simulate multiple processors."
+    },
+    "lwl $t1,-100($t2)": {
+        "prefix": "lwl",
+        "body": ["lwl \\$t1, -100(\\$t2)"],
+        "description": "Load word left : Load from 1 to 4 bytes left-justified into $t1, starting with effective memory byte address and continuing through the low-order byte of its word"  
+    },
+    "lwr $t1,-100($t2)": {
+        "prefix": "lwr",
+        "body": ["lwr \\$t1,-100(\\$t2)"],
+        "description": "Load word right : Load from 1 to 4 bytes right-justified into $t1, starting with effective memory byte address and continuing through the high-order byte of its word"
+    },
+    "lui $t1,100": {
+        "prefix": "lui",
+        "body": ["lui \\$t1, 100"],
+        "description": "Load upper immediate : Set high-order 16 bits of $t1 to 16-bit immediate and low-order 16 bits to 0"
+    },
+    "sw $t1,-100($t2)": {
+        "prefix": "sw",
+        "body": ["sw \\$t1, -100(\\$t2)"],
+        "description": "Store word : Store contents of $t1 into effective memory word address" 
+    },
+    "sc $t1,-100($t2)": {
+        "prefix": "sc",
+        "body": ["sc \\$t1, -100(\\$t2)"],
+        "description": "Store conditional : Paired with Load Linked (ll) to perform atomic read-modify-write.  Stores $t1 value into effective address, then sets $t1 to 1 for success.  Always succeeds because MARS does not simulate multiple processors."
+    },
+    "swl $t1,-100($t2)": {
+        "prefix": "swl",
+        "body": ["swl \\$t1, -100(\\$t2)"],
+        "description": "Store word left : Store high-order 1 to 4 bytes of $t1 into memory, starting with effective byte address and continuing through the low-order byte of its word"
+    },
+    "swr $t1,-100($t2)": {
+        "prefix": "swr",
+        "body": ["swr \\$t1, -100(\\$t2)"],
+        "description": "Store word right : Store low-order 1 to 4 bytes of $t1 into memory, starting with high-order byte of word containing effective byte address and continuing through that byte address"
+    },
+    "beq $t1,$t2,label": {
+        "prefix": "beq",
+        "body": ["beq \\$t1, \\$t2, label"],
+        "description": "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal"
+    },
+    "bne $t1,$t2,label": {
+        "prefix": "bne",
+        "body": ["bne \\$t1, \\$t2, label"],
+        "description": "Branch if not equal : Branch to statement at label's address if $t1 and $t2 are not equal"
+    },
+    "bgez $t1,label": {
+        "prefix": "bgez",
+        "body": ["bgez \\$t1, label"],  
+        "description": "Branch if greater than or equal to zero : Branch to statement at label's address if $t1 is greater than or equal to zero"   
+    },
+    "bgezal $t1,label": {
+        "prefix": "bgezal",
+        "body": ["bgezal \\$t1, label"],
+        "description": "Branch if greater then or equal to zero and link : If $t1 is greater than or equal to zero, then set $ra to the Program Counter and branch to statement at label's address"
+    },
+    "bgtz $t1,label": {
+        "prefix": "bgtz",
+        "body": ["bgtz \\$t1, label"],
+        "description": "Branch if greater than zero : Branch to statement at label's address if $t1 is greater than zero"
+    },
+    "blez $t1,label": {
+        "prefix": "blez",
+        "body": ["blez \\$t1, label"],
+        "description": "Branch if less than or equal to zero : Branch to statement at label's address if $t1 is less than or equal to zero"
+    },
+    "bltz $t1,label": {
+        "prefix": "bltz",
+        "body": ["bltz \\$t1, label"],
+        "description": "Branch if less than zero : Branch to statement at label's address if $t1 is less than zero"
+    },
+    "bltzal $t1,label": {
+        "prefix": "bltzal", 
+        "body": ["bltzal \\$t1, label"],
+        "description": "Branch if less than zero and link : If $t1 is less than or equal to zero, then set $ra to the Program Counter and branch to statement at label's address"
+    },
+    "slt $t1,$t2,$t3": {
+        "prefix": "slt",
+        "body": ["slt \\$t1, \\$t2, \\$t3"],
+        "description": "Set less than : If $t2 is less than $t3, then set $t1 to 1 else set $t1 to 0"
+    },
+    "sltu $t1,$t2,$t3": {
+        "prefix": "sltu",
+        "body": ["sltu \\$t1, \\$t2, \\$t3"],
+        "description": "Set less than unsigned : If $t2 is less than $t3 using unsigned comparision, then set $t1 to 1 else set $t1 to 0"
+    },  
+    "slti $t1,$t2,-100": {
+        "prefix": "slti",
+        "body": ["slti \\$t1, \\$t2, -100"],
+        "description": "Set less than immediate : If $t2 is less than sign-extended 16-bit immediate, then set $t1 to 1 else set $t1 to 0"
+    },
+    "sltiu $t1,$t2,-100": {
+        "prefix": "sltiu",
+        "body": ["sltiu \\$t1, \\$t2, -100"],
+        "description": "Set less than immediate unsigned : If $t2 is less than sign-extended 16-bit immediate using unsigned comparison, then set $t1 to 1 else set $t1 to 0"
+    },
+    "movn $t1,$t2,$t3": {
+        "prefix": "movn", 
+        "body": ["movn \\$t1, \\$t2, \\$t3"],
+        "description": "Move conditional not zero : Set $t1 to $t2 if $t3 is not zero"
+    },
+    "movz $t1,$t2,$t3": {
+        "prefix": "movz",
+        "body": ["movz \\$t1, \\$t2, \\$t3"],
+        "description": "Move conditional zero : Set $t1 to $t2 if $t3 is zero"
+    },
+    "movf $t1,$t2": {
+        "prefix": "movf",
+        "body": ["movf \\$t1, \\$t2"],
+        "description": "Move if FP condition flag 0 false : Set $t1 to $t2 if FPU (Coprocessor 1) condition flag 0 is false (zero)"
+    },
+    "movf $t1,$t2,1": {
+        "prefix": "movf",
+        "body": ["movf \\$t1, \\$t2, 1"],
+        "description": "Move if specified FP condition flag false : Set $t1 to $t2 if FPU (Coprocessor 1) condition flag specified by the immediate is false (zero)" 
+    },
+    "movt $t1,$t2": {
+        "prefix": "movt",
+        "body": ["movt \\$t1, \\$t2"],
+        "description": "Move if FP condition flag 0 true : Set $t1 to $t2 if FPU (Coprocessor 1) condition flag 0 is true (one)"
+    },
+    "movt $t1,$t2,1": {
+        "prefix": "movt",
+        "body": ["movt \\$t1, \\$t2, 1"],
+        "description": "Move if specfied FP condition flag true : Set $t1 to $t2 if FPU (Coprocessor 1) condition flag specified by the immediate is true (one)"
+    },
+    "break 100": {
+        "prefix": "break", 
+        "body": ["break 100"],
+        "description": "Break execution with code : Terminate program execution with specified exception code"
+    },
+    "break": {
+        "prefix": "break",
+        "body": ["break"],
+        "description": "Break execution : Terminate program execution with exception"
+    },
+    "syscall": {
+        "prefix": "syscall",
+        "body": ["syscall"],
+        "description": "Issue a system call : Execute the system call specified by value in $v0"
+    },
+    "j target": {
+        "prefix": "j",
+        "body": ["j target"],
+        "description": "Jump unconditionally : Jump to statement at target address"
+    },  
+    "jr $t1": {
+        "prefix": "jr",
+        "body": ["jr \\$t1"],
+        "description": "Jump register unconditionally : Jump to statement whose address is in $t1"
+    },
+    "jal target": {
+        "prefix": "jal",
+        "body": ["jal target"],
+        "description": "Jump and link : Set $ra to Program Counter (return address) then jump to statement at target address"
+    },
+    "jalr $t1,$t2": {
+        "prefix": "jalr",
+        "body": ["jalr \\$t1, \\$t2"],
+        "description": "Jump and link register : Set $t1 to Program Counter (return address) then jump to statement whose address is in $t2"
+    },
+    "jalr $t1": {
+        "prefix": "jalr",
+        "body": ["jalr \\$t1"],
+        "description": "Jump and link register : Set $ra to Program Counter (return address) then jump to statement whose address is in $t1" 
+    },
+    "lb $t1,-100($t2)": {
+        "prefix": "lb",
+        "body": ["lb \\$t1, -100(\\$t2)"],
+        "description": "Load byte : Set $t1 to sign-extended 8-bit value from effective memory byte address"
+    },
+    "lh $t1,-100($t2)": {
+        "prefix": "lh",
+        "body": ["lh \\$t1, -100(\\$t2)"],
+        "description": "Load halfword : Set $t1 to sign-extended 16-bit value from effective memory halfword address"
+    },
+    "lhu $t1,-100($t2)": {
+        "prefix": "lhu",
+        "body": ["lhu \\$t1, -100(\\$t2)"],
+        "description": "Load halfword unsigned : Set $t1 to zero-extended 16-bit value from effective memory halfword address"
+    },
+    "lbu $t1,-100($t2)": {
+        "prefix": "lbu",
+        "body": ["lbu \\$t1, -100(\\$t2)"],
+        "description": "Load byte unsigned : Set $t1 to zero-extended 8-bit value from effective memory byte address"
+    },
+    "sb $t1,-100($t2)": {
+        "prefix": "sb",
+        "body": ["sb \\$t1, -100(\\$t2)"],
+        "description": "Store byte : Store the low-order 8 bits of $t1 into the effective memory byte address"
+    },
+    "sh $t1,-100($t2)": {
+        "prefix": "sh",
+        "body": ["sh \\$t1, -100(\\$t2)"],
+        "description": "Store halfword : Store the low-order 16 bits of $t1 into the effective memory halfword address"
+    },
+    "clo $t1,$t2": {
+        "prefix": "clo",
+        "body": ["clo \\$t1, \\$t2"],
+        "description": "Count number of leading ones : Set $t1 to the count of leading one bits in $t2 starting at most significant bit position"   
+    },
+    "clz $t1,$t2": {
+        "prefix": "clz",
+        "body": ["clz \\$t1, \\$t2"],
+        "description": "Count number of leading zeroes : Set $t1 to the count of leading zero bits in $t2 starting at most significant bit positio"
+    },
+    "mfc0 $t1,$8": {
+        "prefix": "mfc0",
+        "body": ["mfc0 \\$t1, \\$8"],
+        "description": "Move from Coprocessor 0 : Set $t1 to the value stored in Coprocessor 0 register $8" 
+    },
+    "mtc0 $t1,$8": {
+        "prefix": "mtc0", 
+        "body": ["mtc0 \\$t1, \\$8"],
+        "description": "Move to Coprocessor 0 : Set Coprocessor 0 register $8 to value stored in $t1"
+    },
+    "sub.s $f0,$f1,$f3": {
+        "prefix": "sub.s",
+        "body": ["sub.s \\$f0, \\$f1, \\$f3"],
+        "description": "Floating point subtraction single precision : Set $f0 to single-precision floating point value of $f1  minus $f3"
+    },
+    "div.s $f0,$f1,$f3": {
+        "prefix": "div.s",
+        "body": ["div.s \\$f0, \\$f1, \\$f3"],
+        "description": "Floating point division single precision : Set $f0 to single-precision floating point value of $f1 divided by $f3"
+    },
+    "div.d $f2,$f4,$f6": {
+        "prefix": "div.d",
+        "body": ["div.d \\$f2, \\$f4, \\$f6"],
+        "description": "Floating point division double precision : Set $f2 to double-precision floating point value of $f4 divided by $f6"
+    },
+    "sqrt.d $f2,$f4": {
+        "prefix": "sqrt.d",
+        "body": ["sqrt.d \\$f2, \\$f4"],
+        "description": "Square root double precision : Set $f2 to double-precision floating point square root of $f4"
+    },
+    "sqrt.s $f0,$f1": {
+        "prefix": "sqrt.s",
+        "body": ["sqrt.s \\$f0, \\$f1"],
+        "description": "Square root single precision : Set $f0 to single-precision floating point square root of $f1"
+    },
+    "floor.w.s $f0,$f1": {
+        "prefix": "floor.w.s",
+        "body": ["floor.w.s \\$f0, \\$f1"],
+        "description": "Floor single precision to word : Set $f0 to 32-bit integer floor of single-precision float in $f1"
+    },
+    "ceil.w.s $f0,$f1": {
+        "prefix": "ceil.w.s",
+        "body": ["ceil.w.s \\$f0, \\$f1"],
+        "description": "Ceiling single precision to word : Set $f0 to 32-bit integer ceiling of single-precision float in $f1"
+    },
+    "round.w.s $f0,$f1": {
+        "prefix": "round.w.s",
+        "body": ["round.w.s \\$f0, \\$f1"], 
+        "description": "Round single precision to word : Set $f0 to 32-bit integer round of single-precision float in $f1"
+    },
+    "trunc.w.s $f0,$f1": {
+        "prefix": "trunc.w.s",
+        "body": ["trunc.w.s \\$f0, \\$f1"],
+        "description": "Truncate single precision to word : Set $f0 to 32-bit integer truncation of single-precision float in $f1"
+    },
+    "sub.d $f2,$f4,$f6": {
+        "prefix": "sub.d",
+        "body": ["sub.d \\$f2, \\$f4, \\$f6"],
+        "description": "Floating point subtraction double precision : Set $f2 to double-precision floating point value of $f4 minus $f6"
+    }, 
+    "floor.w.d $f1,$f2": {
+        "prefix": "floor.w.d",
+        "body": ["floor.w.d \\$f1, \\$f2"],
+        "description": "Floor double precision to word : Set $f1 to 32-bit integer floor of double-precision float in $f2"
+    },
+    "ceil.w.d $f1,$f2": {
+        "prefix": "ceil.w.d", 
+        "body": ["ceil.w.d \\$f1, \\$f2"],
+        "description": "Ceiling double precision to word : Set $f1 to 32-bit integer ceiling of double-precision float in $f2"
+    },
+    "round.w.d $f1,$f2": {
+        "prefix": "round.w.d",
+        "body": ["round.w.d \\$f1, \\$f2"],
+        "description": "Round double precision to word : Set $f1 to 32-bit integer round of double-precision float in $f2"
+    },
+    "trunc.w.d $f1,$f2": {
+        "prefix": "trunc.w.d",
+        "body": ["trunc.w.d \\$f1, \\$f2"],
+        "description": "Truncate double precision to word : Set $f1 to 32-bit integer truncation of double-precision float in $f2"
+    },
+    "bc1t label": {
+        "prefix": "bc1t",
+        "body": ["bc1t label"],
+        "description": "Branch if FP condition flag 0 true (BC1T, not BCLT) : If Coprocessor 1 condition flag 0 is true (one) then branch to statement at label's address"
+    },
+    "bc1t 1,label": {
+        "prefix": "bc1t",
+        "body": ["bc1t 1,label"],
+        "description": "Branch if specified FP condition flag true (BC1T, not BCLT) : If Coprocessor 1 condition flag specified by immediate is true (one) then branch to statement at label's address"
+    },
+    "bc1f label": {
+        "prefix": "bc1f",
+        "body": ["bc1f label"],
+        "description": "Branch if FP condition flag 0 false (BC1F, not BCLF) : If Coprocessor 1 condition flag 0 is false (zero) then branch to statement at label's address"
+    },
+    "bc1f 1,label": {
+        "prefix": "bc1f",
+        "body": ["bc1f 1,label"],
+        "description": "Branch if specified FP condition flag false (BC1F, not BCLF) : If Coprocessor 1 condition flag specified by immediate is false (zero) then branch to statement at label's address"
+    },
+    "c.eq.s $f0,$f1": {
+        "prefix": "c.eq.s",
+        "body": ["c.eq.s \\$f0, \\$f1"],
+        "description": "Compare equal single precision : If $f0 is equal to $f1, set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.eq.s 1,$f0,$f1": {
+        "prefix": "c.eq.s",
+        "body": ["c.eq.s 1,\\$f0, \\$f1"],
+        "description": "Compare equal single precision : If $f0 is equal to $f1, set Coprocessor 1 condition flag specied by immediate to true else set it to false"
+    },
+    "c.le.s $f0,$f1": {
+        "prefix": "c.le.s",
+        "body": ["c.le.s \\$f0, \\$f1"],
+        "description": "Compare less or equal single precision : If $f0 is less than or equal to $f1, set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.le.s 1,$f0,$f1": {
+        "prefix": "c.le.s",
+        "body": ["c.le.s 1,\\$f0, \\$f1"],
+        "description": "Compare less or equal single precision : If $f0 is less than or equal to $f1, set Coprocessor 1 condition flag specified by immediate to true else set it to false"
+    },
+    "c.lt.s $f0,$f1": {
+        "prefix": "c.lt.s",
+        "body": ["c.lt.s \\$f0, \\$f1"],
+        "description": "Compare less than single precision : If $f0 is less than $f1, set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.lt.s 1,$f0,$f1": {
+        "prefix": "c.lt.s",
+        "body": ["c.lt.s 1,\\$f0, \\$f1"],
+        "description": "Compare less than single precision : If $f0 is less than $f1, set Coprocessor 1 condition flag specified by immediate to true else set it to false"
+    },
+    "c.eq.d $f2,$f4": {
+        "prefix": "c.eq.d",
+        "body": ["c.eq.d \\$f2, \\$f4"],
+        "description": "Compare equal double precision : If $f2 is equal to $f4 (double-precision), set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.eq.d 1,$f2,$f4": {
+        "prefix": "c.eq.d",
+        "body": ["c.eq.d 1,\\$f2, \\$f4"],
+        "description": "Compare equal double precision : If $f2 is equal to $f4 (double-precision), set Coprocessor 1 condition flag specified by immediate to true else set it to false"
+    },
+    "c.le.d $f2,$f4": {
+        "prefix": "c.le.d",
+        "body": ["c.le.d \\$f2, \\$f4"],
+        "description": "Compare less or equal double precision : If $f2 is less than or equal to $f4 (double-precision), set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.le.d 1,$f2,$f4": {
+        "prefix": "c.le.d",
+        "body": ["c.le.d 1,\\$f2, \\$f4"],
+        "description": "Compare less or equal double precision : If $f2 is less than or equal to $f4 (double-precision), set Coprocessor 1 condition flag specfied by immediate true else set it false"
+    },
+    "c.lt.d $f2,$f4": {
+        "prefix": "c.lt.d",
+        "body": ["c.lt.d \\$f2, \\$f4"],
+        "description": "Compare less than double precision : If $f2 is less than $f4 (double-precision), set Coprocessor 1 condition flag 0 true else set it false"
+    },
+    "c.lt.d 1,$f2,$f4": {
+        "prefix": "c.lt.d",
+        "body": ["c.lt.d 1,\\$f2, \\$f4"],
+        "description": "Compare less than double precision : If $f2 is less than $f4 (double-precision), set Coprocessor 1 condition flag specified by immediate to true else set it to false"
+    },
+    "abs.s $f0,$f1": {
+        "prefix": "abs.s",
+        "body": ["abs.s \\$f0, \\$f1"],
+        "description": "Floating point absolute value single precision : Set $f0 to absolute value of $f1, single precision"
+    },
+    "abs.d $f2,$f4": {
+        "prefix": "abs.d",
+        "body": ["abs.d \\$f2, \\$f4"],
+        "description": "Floating point absolute value double precision : Set $f2 to absolute value of $f4, double precision"
+    },
+    "cvt.d.s $f2,$f1": {
+        "prefix": "cvt.d.s",
+        "body": ["cvt.d.s \\$f2, \\$f1"],
+        "description": "Convert from single precision to double precision : Set $f2 to double precision equivalent of single precision value in $f1"
+    },
+    "cvt.d.w $f2,$f1": {
+        "prefix": "cvt.d.w",
+        "body": ["cvt.d.w \\$f2, \\$f1"],
+        "description": "Convert from word to double precision : Set $f2 to double precision equivalent of 32-bit integer value in $f1"
+    },
+    "cvt.s.d $f1,$f2": {
+        "prefix": "cvt.s.d",
+        "body": ["cvt.s.d \\$f1, \\$f2"],
+        "description": "Convert from double precision to single precision : Set $f1 to single precision equivalent of double precision value in $f2"
+    },
+    "cvt.s.w $f0,$f1": {
+        "prefix": "cvt.s.w",
+        "body": ["cvt.s.w \\$f0, \\$f2"],
+        "description": "Convert from word to single precision : Set $f0 to single precision equivalent of 32-bit integer value in $f2"
+    },
+    "cvt.w.d $f1,$f2": {
+        "prefix": "cvt.w.d",
+        "body": ["cvt.w.d \\$f1, \\$f2"],
+        "description": "Convert from double precision to word : Set $f1 to 32-bit integer equivalent of double precision value in $f2"
+    },
+    "cvt.w.s $f0,$f1": {
+        "prefix": "cvt.w.s",
+        "body": ["cvt.w.s \\$f0, \\$f1"],
+        "description": "Convert from single precision to word : Set $f0 to 32-bit integer equivalent of single precision value in $f1"
+    },
+    "mov.d $f2,$f4": {
+        "prefix": "mov.d",
+        "body": ["mov.d \\$f2, \\$f4"],
+        "description": "Move floating point double precision : Set double precision $f2 to double precision value in $f4"
+    },
+    "movf.d $f2,$f4": {
+        "prefix": "movf.d",
+        "body": ["movf.d \\$f2, \\$f4"],
+        "description": "Move floating point double precision : If condition flag 0 false, set double precision $f2 to double precision value in $f4"
+    },
+    "movf.d $f2,$f4,1": {
+        "prefix": "movf.d",
+        "body": ["movf.d \\$f2, \\$f4,1"],
+        "description": "Move floating point double precision : If condition flag specified by immediate is false, set double precision $f2 to double precision value in $f4"
+    },
+    "movt.d $f2,$f4": {
+        "prefix": "movt.d",
+        "body": ["movt.d \\$f2, \\$f4"],
+        "description": "Move floating point double precision : If condition flag 0 true, set double precision $f2 to double precision value in $f4"
+    },
+    "movt.d $f2,$f4,1": {
+        "prefix": "movt.d",
+        "body": ["movt.d \\$f2, \\$f4, 1"],
+        "description": "Move floating point double precision : If condition flag specified by immediate is true, set double precision $f2 to double precision value in $f4e" 
+    },
+    "movn.d $f2,$f4,$t3": {
+        "prefix": "movn.d",
+        "body": ["movn.d \\$f2, \\$f4, \\$t3"],
+        "description": "Move floating point double precision : If $t3 is not zero, set double precision $f2 to double precision value in $f4"
+    },
+    "movz.d $f2,$f4,$t3": {
+        "prefix": "movz.d",
+        "body": ["movz.d \\$f2, \\$f4, \\$t3"],
+        "description": "Move floating point double precision : If $t3 is zero, set double precision $f2 to double precision value in $f4"
+    },
+    "mov.s $f0,$f1": {
+        "prefix": "mov.s",
+        "body": ["mov.s \\$f0, \\$f1"],
+        "description": "Move floating point single precision : Set single precision $f0 to single precision value in $f1"
+    },
+    "movf.s $f0,$f1": {
+        "prefix": "movf.s",
+        "body": ["movf.s \\$f0, \\$f1"],
+        "description": "Move floating point single precision : If condition flag 0 is false, set single precision $f0 to single precision value in $f1"
+    },
+    "movf.s $f0,$f1,1": {
+        "prefix": "movf.s",
+        "body": ["movf.s \\$f0, \\$f1, 1"],
+        "description": "Move floating point single precision : If condition flag specified by immediate is false, set single precision $f0 to single precision value in $f1e"
+    },
+    "movt.s $f0,$f1": {
+        "prefix": "movt.s",
+        "body": ["movt.s \\$f0, \\$f1"],
+        "description": "Move floating point single precision : If condition flag 0 is true, set single precision $f0 to single precision value in $f1e"
+    },
+    "movt.s $f0,$f1,1": {
+        "prefix": "movt.s",
+        "body": ["movt.s \\$f0, \\$f1, 1"],
+        "description": "Move floating point single precision : If condition flag specified by immediate is true, set single precision $f0 to single precision value in $f1e"
+    },
+    "movn.s $f0,$f1,$t3": {
+        "prefix": "movn.s",
+        "body": ["movn.s \\$f0, \\$f1, \\$t3"],
+        "description": "Move floating point single precision : If $t3 is not zero, set single precision $f0 to single precision value in $f1"
+    },
+    "movz.s $f0,$f1,$t3": {
+        "prefix": "movz.s",
+        "body": ["movz.s \\$f0, \\$f1, \\$t3"],
+        "description": "Move floating point single precision : If $t3 is zero, set single precision $f0 to single precision value in $f1"
+    },
+    "mfc1 $t1,$f1": {
+        "prefix": "mfc1",
+        "body": ["mfc1 \\$t1, \\$f1"],
+        "description": "Move from Coprocessor 1 (FPU) : Set $t1 to value in Coprocessor 1 register $f1"
+    },
+    "mtc1 $t1,$f1": {
+        "prefix": "mtc1",
+        "body": ["mtc1 \\$t1, \\$f1"],
+        "description": "Move to Coprocessor 1 (FPU) : Set Coprocessor 1 register $f1 to value in $t1"
+    },
+    "neg.d $f2,$f4": {
+        "prefix": "neg.d",
+        "body": ["neg.d \\$f2, \\$f4"],
+        "description": "Floating point negate double precision : Set double precision $f2 to negation of double precision value in $f4"
+    },
+    "neg.s $f0,$f1": {
+        "prefix": "neg.s",
+        "body": ["neg.s \\$f0, \\$f1"],
+        "description": "Floating point negate single precision : Set single precision $f0 to negation of single precision value in $f1"
+    },
+    "lwc1 $f1,-100($t2)": {
+        "prefix": "lwc1",
+        "body": ["lwc1 \\$f1, -100(\\$t2)"],
+        "description": "Load word into Coprocessor 1 (FPU) : Set $f1 to 32-bit value from effective memory word address"
+    },
+    "ldc1 $f2,-100($t2)": {
+        "prefix": "ldc1",
+        "body": ["ldc1 \\$f2, -100(\\$t2)"],
+        "description": "Load double word Coprocessor 1 (FPU)) : Set $f2 to 64-bit value from effective memory doubleword address"
+    }, 
+    "swc1 $f1,-100($t2)": {
+        "prefix": "swc1",
+        "body": ["swc1 \\$f1, -100(\\$t2)"],
+        "description": "Store word from Coprocesor 1 (FPU) : Store 32 bit value in $f1 to effective memory word address"
+    },
+    "sdc1 $f2,-100($t2)": {
+        "prefix": "sdc1",
+        "body": ["sdc1 \\$f2, -100(\\$t2)"],
+        "description": "Store double word from Coprocessor 1 (FPU)) : Store 64 bit value in $f2 to effective memory doubleword address"
+    },
+    "teq $t1,$t2": {
+        "prefix": "teq",
+        "body": ["teq \\$t1, \\$t2"],
+        "description": "Trap if equal : Trap if $t1 is equal to $t2"
+    },
+    "teqi $t1,-100": {
+        "prefix": "teqi",
+        "body": ["teqi \\$t1, -100"],
+        "description": "Trap if equal to immediate : Trap if $t1 is equal to sign-extended 16 bit immediate"
+    },
+    "tne $t1,$t2": {
+        "prefix": "tne",
+        "body": ["tne \\$t1, \\$t2"],
+        "description": "Trap if not equal : Trap if $t1 is not equal to $t2"
+    },
+    "tnei $t1,-100": {
+        "prefix": "tnei",
+        "body": ["tnei \\$t1, -100"],
+        "description": "Trap if not equal to immediate : Trap if $t1 is not equal to sign-extended 16 bit immediate"
+    },
+    "tge $t1,$t2": {
+        "prefix": "tge",
+        "body": ["tge \\$t1, \\$t2"],
+        "description": "Trap if greater or equal : Trap if $t1 is greater than or equal to $t2"
+    },
+    "tgeu $t1,$t2": {
+        "prefix": "tgeu",
+        "body": ["tgeu \\$t1, \\$t2"],
+        "description": "Trap if greater or equal unsigned : Trap if $t1 is greater than or equal to $t2 using unsigned comparision"
+    },
+    "tgei $t1,-100": {
+        "prefix": "tgei",
+        "body": ["tgei \\$t1, -100"],
+        "description": "Trap if greater than or equal to immediate : Trap if $t1 greater than or equal to sign-extended 16 bit immediate"
+    },
+    "tgeiu $t1,-100": {
+        "prefix": "tgeiu",
+        "body": ["tgeiu \\$t1, -100"],
+        "description": "Trap if greater or equal to immediate unsigned : Trap if $t1 greater than or equal to sign-extended 16 bit immediate, unsigned comparison"
+    },
+    "tltu $t1,$t2": {
+        "prefix": "tltu",
+        "body": ["tltu \\$t1, \\$t2"],
+        "description": "Trap if less than unsigned : Trap if $t1 less than $t2, unsigned comparison"
+    },
+    "tlti $t1,-100": {
+        "prefix": "tlti",
+        "body": ["tlti \\$t1, -100"],
+        "description": "Trap if less than immediate : Trap if $t1 less than sign-extended 16-bit immediate"
+    },
+    "tltiu $t1,-100": {
+        "prefix": "tltiu",
+        "body": ["tltiu \\$t1, -100"],
+        "description": "Trap if less than immediate unsigned : Trap if $t1 less than sign-extended 16-bit immediate, unsigned comparison"
+    },
+    "eret": {
+        "prefix": "eret",
+        "body": ["eret"],
+        "description": "Exception return : Set Program Counter to Coprocessor 0 EPC register value, set Coprocessor Status register bit 1 (exception level) to zero"
+    }
+}

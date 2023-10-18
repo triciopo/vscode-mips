@@ -3,7 +3,7 @@
   "displayName": "vscode-mips",
   "publisher": "triciopo",
   "description": "MIPS Support for VS Code",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -42,6 +42,12 @@
         "language": "MIPS",
         "scopeName": "source.mips",
         "path": "./syntaxes/mips.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "MIPS",
+        "path": "./snippets/mips.json"
       }
     ],
     "commands": [
