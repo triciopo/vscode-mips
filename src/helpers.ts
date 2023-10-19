@@ -10,8 +10,7 @@ export function getActiveFilePath(): string | undefined {
     const activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
         const filePath = activeEditor.document.uri.fsPath;
-        const fileName = path.basename(filePath);
-        return fileName;
+        return filePath;
     }
 }
 
