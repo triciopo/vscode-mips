@@ -74,7 +74,7 @@
       "patterns": [
         {
           "name": "keyword.operators.mips",
-          "match": "\\b(add.s|add.d|add|addi|addiu|addu|sub.s|sub.d|sub|subu|mul.d|mul.s|mul|mulu|div.s|div.d|div|divu|rem|remu|sqrt.d|sqrt.s|madd|maddu|msub|msubu)\\b"
+          "match": "\\b(add.s|add.d|add|addi|addiu|addu|sub.s|sub.d|sub|subi|subiu|subu|mul.d|mul.s|mul|mulu|div.s|div.d|div|divu|rem|remu|sqrt.d|sqrt.s|madd|maddu|msub|msubu)\\b"
         },
         {
           "name": "keyword.move.mips",

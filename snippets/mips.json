@@ -39,6 +39,16 @@
         "body": ["sub \\$t1, \\$t2, \\$t3"], 
         "description": "Subtraction with overflow : set $t1 to ($t2 minus $t3)"
     },
+    "subi $t1,$t2,-100": {
+        "prefix": "subi",
+        "body": ["subi \\$t1, \\$t2, -100"],
+        "description": "Subtraction immediate with overflow : set $t1 to ($t2 minus signed 16-bit immediate)"
+    },
+    "subiu $t1,$t2,-100": {
+        "prefix": "subiu",
+        "body": ["subiu \\$t1, \\$t2, -100"],
+        "description": "Subtraction immediate unsigned : set $t1 to ($t2 minus 32-bit immediate), no overflow"
+    },
     "subu $t1,$t2,$t3": {
         "prefix": "subu",
         "body": ["subu \\$t1, \\$t2, \\$t3"],
