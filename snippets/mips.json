@@ -4,6 +4,11 @@
         "body": ["nop"],
         "description": "Null operation : machine code is all zeroes"
     },
+    "abs $t1,$t2": {
+        "prefix": "abs",
+        "body": ["abs \\$t1, \\$t2"],
+        "description": "Absolute value : Set $t1 to absolute value of $t2"
+    },
     "add $t1,$t2,$t3": {
         "prefix": "add",
         "body": ["add \\$t1, \\$t2, \\$t3"],
@@ -219,6 +224,51 @@
         "body": ["lui \\$t1, 100"],
         "description": "Load upper immediate : Set high-order 16 bits of $t1 to 16-bit immediate and low-order 16 bits to 0"
     },
+    "l.d $f2,($t2)": {
+        "prefix": "l.d",
+        "body": ["l.d \\$f2, (\\$t2)"],
+        "description": "Load floating point double precision : Set $f2 and $f3 register pair to 64-bit value effective memory doubleword address"
+    },
+    "l.s $f0,($t2)": {
+        "prefix": "l.s",
+        "body": ["l.s \\$f0, (\\$t2)"],
+        "description": "Load floating point single precision : Set $f0 to 32-bit value at effective memory word address"
+    },
+    "ulh $t1,-100($t2)": {
+        "prefix": "ulh",
+        "body": ["ulh \\$t1, -100(\\$t2)"],
+        "description": "Unaligned Load Halfword : Set $t1 to the 16 bits, sign-extended, starting at effective memory byte address"
+    },
+    "ulhu $t1,-100($t2)": {
+        "prefix": "ulhu",
+        "body": ["ulhu \\$t1, -100(\\$t2)"],
+        "description": "Unaligned Load Halfword : Set $t1 to the 16 bits, zero-extended, starting at effective memory byte address"
+    },
+    "ulw $t1,-100($t2)": {
+        "prefix": "ulw",
+        "body": ["ulw \\$t1, -100(\\$t2)"],
+        "description": "Unaligned Load Word : Set $t1 to the 32 bits starting at effective memory byte address" 
+    },
+    "ush $t1,-100($t2)": {
+        "prefix": "ush",
+        "body": ["ush \\$t1, -100(\\$t2)"],
+        "description": "Unaligned Store Halfword : Store low-order halfword $t1 contents into the 16 bits starting at effective memory byte address"
+    },
+    "usw $t1,-100($t2)": {
+        "prefix": "usw",
+        "body": ["usw \\$t1, -100(\\$t2)"],
+        "description": "Unaligned Store Word : Store $t1 contents into the 32 bits starting at effective memory byte address"
+    },
+    "s.d $f2,($t2)": {
+        "prefix": "s.d",
+        "body": ["s.d \\$f2, (\\$t2)"],
+        "description": "Store floating point double precision : Store 64 bits from $f2 and $f3 register pair to effective memory doubleword address"
+    },
+    "s.s $f0,($t2)": {
+        "prefix": "s.s",
+        "body": ["s.s \\$f0, (\\$t2)"],
+        "description": "Store floating point single precision : Store 32-bit value from $f1 to effective memory word address"
+    },
     "sw $t1,-100($t2)": {
         "prefix": "sw",
         "body": ["sw \\$t1, -100(\\$t2)"],
@@ -249,6 +299,11 @@
         "body": ["bne \\$t1, \\$t2, label"],
         "description": "Branch if not equal : Branch to statement at label's address if $t1 and $t2 are not equal"
     },
+    "bgeu $t1,$t2,label": {
+        "prefix": "bgeu",
+        "body": ["bgeu \\$t1, \\$t2, label"],
+        "description": "Branch if greater than or equal to unsigned : Branch to statement at label's address if $t1 is greater than or equal to $t2 (unsigned compare)"
+    },
     "bgez $t1,label": {
         "prefix": "bgez",
         "body": ["bgez \\$t1, label"],  
@@ -259,15 +314,40 @@
         "body": ["bgezal \\$t1, label"],
         "description": "Branch if greater then or equal to zero and link : If $t1 is greater than or equal to zero, then set $ra to the Program Counter and branch to statement at label's address"
     },
+    "bgtu $t1,$t2,label": {
+        "prefix": "bgtu",
+        "body": ["bgtu \\$t1, \\$t2, label"],
+        "description": "Branch if greater than unsigned : Branch to statement at label's address if $t1 is greater than $t2 (unsigned compare)"
+    },
     "bgtz $t1,label": {
         "prefix": "bgtz",
         "body": ["bgtz \\$t1, label"],
         "description": "Branch if greater than zero : Branch to statement at label's address if $t1 is greater than zero"
     },
+    "ble $t1,$t2,label": {
+        "prefix": "ble",
+        "body": ["ble \\$t1, \\$t2, label"],
+        "description": "Branch if less than or equal to : Branch to statement at label's address if $t1 is less than or equal to $t2"
+    },
+    "bleu $t1,$t2,label": {
+        "prefix": "bleu",
+        "body": ["bleu \\$t1, \\$t2, label"],
+        "description": "Branch if less than or equal to unsigned : Branch to statement at label's address if $t1 is less than or equal to $t2 (unsigned compare)"
+    },
     "blez $t1,label": {
         "prefix": "blez",
         "body": ["blez \\$t1, label"],
         "description": "Branch if less than or equal to zero : Branch to statement at label's address if $t1 is less than or equal to zero"
+    },
+    "blt $t1,label": {
+        "prefix": "blt",
+        "body": ["blt \\$t1, \\$t2, label"],
+        "description": "Branch if less than : Branch to statement at label's address if $t1 is less than $t2"
+    },
+    "bltu $t1,label": {
+        "prefix": "bltu",
+        "body": ["bltu \\$t1, \\$t2, label"],
+        "description": "Branch if less than unsigned : Branch to statement at label's address if $t1 is less than $t2 using unsigned comparison"
     },
     "bltz $t1,label": {
         "prefix": "bltz",

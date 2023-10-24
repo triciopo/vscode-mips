@@ -73,7 +73,7 @@
     "keywords": {
       "patterns": [
         {
-          "name": "keyword.operators.mips",
+          "name": "keyword.arithmetic.mips",
           "match": "\\b(add.s|add.d|add|addi|addiu|addu|sub.s|sub.d|sub|subi|subiu|subu|mul.d|mul.s|mul|mulu|div.s|div.d|div|divu|rem|remu|sqrt.d|sqrt.s|madd|maddu|msub|msubu)\\b"
         },
         {
@@ -82,11 +82,11 @@
         },
         {
           "name": "keyword.load.mips",
-          "match": "\\b(lb|lbu|lh|lhu|lui|lw|lwl|lwr|ll|ld|li|la|lwc1|ldc1)\\b"
+          "match": "\\b(lb|lbu|lh|lhu|lui|lw|lwl|lwr|ll|ld|li|la|lwc1|ldc1|ulw|ulh|ulhu)\\b"
         },
         {
           "name": "keyword.store.mips",
-          "match": "\\b(sb|sc|sh|sw|sd|swl|swr|swc1|sdc1)\\b"
+          "match": "\\b(sb|sc|sh|sw|sd|swl|swr|swc1|sdc1|ush|usw)\\b"
         },
         {
           "name": "keyword.logic.mips",
@@ -106,7 +106,7 @@
         },
         {
           "name": "keyword.float.mips",
-          "match": "\\b(abs.d|abs.s|ceil.w.d|ceil.w.s|floor.w.d|floor.w.s|round.w.d|round.w.s|trunc.w.d|trunc.w.s)\\b"
+          "match": "\\b(abs.d|abs.s|abs|ceil.w.d|ceil.w.s|floor.w.d|floor.w.s|round.w.d|round.w.s|trunc.w.d|trunc.w.s|s.d|s.s|l.d|l.s)\\b"
         },
         {
           "name": "keyword.trap.mips",
@@ -118,7 +118,7 @@
         },
         {
           "name": "keyword.control.mips",
-          "match": "\\b(blt|bltzal|bltz|beqz|ble|blez|beq|beqz|bge|bgez|bgezal|bgt|bgtz|bne|bnez|bc1t|bc1f)\\b"
+          "match": "\\b(blt|bltzal|bltu|bltz|beqz|ble|bleu|blez|beq|beqz|bge|bgeu|bgez|bgezal|bgt|bgtu|bgtz|bne|bnez|bc1t|bc1f)\\b"
         },
         {
           "name": "keyword.control.mips",
