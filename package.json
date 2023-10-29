@@ -3,7 +3,7 @@
   "displayName": "vscode-mips",
   "publisher": "triciopo",
   "description": "MIPS Support for VS Code",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -66,12 +66,12 @@
       {
         "command": "vscode-mips.assembleExec",
         "key": "F5",
-        "enablement": "resourceLangId == MIPS"
+        "when": "resourceLangId == MIPS"
       },
       {
         "command": "vscode-mips.assembleMips",
         "key": "F4",
-        "enablement": "resourceLangId == MIPS"
+        "when": "resourceLangId == MIPS"
       }
     ],
     "menus": {
